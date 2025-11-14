@@ -3,80 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Email Signup</title>
+<title>Email Signup - Redirect Method</title>
 <style>
-  body { font-family: Arial; text-align: center; padding: 50px; background-color: #f5f5f5; }
+  body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #f5f5f5; }
   h2 { color: #6a49a2; }
-  input { padding: 10px; width: 250px; margin-bottom: 10px; border: 1px solid #6a49a2; border-radius: 3px; }
-  button { padding: 10px 20px; background-color: #6a49a2; color: white; border: none; cursor: pointer; border-radius: 3px; margin: 5px; }
-  button:hover { background-color: #59338a; }
-  #errorMsg { color: red; margin-bottom: 10px; }
-  #linksContainer { margin-top: 20px; }
+  form input { 
+    padding: 10px; 
+    width: 250px; 
+    margin-bottom: 15px; 
+    border: 2px solid #6a49a2; 
+    border-radius: 6px; 
+  }
+  button { 
+    padding: 10px 20px; 
+    background-color: #6a49a2; 
+    color: white; 
+    border: none; 
+    cursor: pointer; 
+    border-radius: 6px; 
+    margin: 10px;
+  }
+  .btn-container { margin-top: 20px; }
 </style>
 </head>
 <body>
 
 <h2>Stay Up-to-Date with Online Digital Products Tips!</h2>
-<p>Subscribe to get daily tips, guides, and insights on Digital Products straight to your inbox. No spam, only practical advice.</p>
+<p>Subscribe to get daily tips, guides, and insights.</p>
 
-<div id="errorMsg"></div>
-
-<div id="signupContainer">
-  <input type="text" id="emailInput" placeholder="Enter your email">
-  <br>
-  <button id="submitBtn">Subscribe</button>
-</div>
-
-<div id="linksContainer"></div>
+<div id="content"></div>
 
 <script>
-document.getElementById('submitBtn').addEventListener('click', async function() {
-    const email = document.getElementById('emailInput').value.trim();
-    const errorDiv = document.getElementById('errorMsg');
-    const linksContainer = document.getElementById('linksContainer');
-    const signupContainer = document.getElementById('signupContainer');
+  // Check URL parameters for success
+  const params = new URLSearchParams(window.location.search);
+  const contentDiv = document.getElementById("content");
 
-    errorDiv.innerText = "";
-    linksContainer.innerHTML = "";
-
-    if (!email) {
-        errorDiv.innerText = "Email is required.";
-        return;
-    }
-
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxzaB4aC2-SXjheHz4drYauk5OaJOUcjjQpY4q-bteDELobD1xTPuAm2kYoRDZCQaBR/exec";
-
-    try {
-        await fetch(scriptURL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: 'email=' + encodeURIComponent(email)
-        });
-
-        // Hide email input and subscribe button
-        signupContainer.style.display = "none";
-        errorDiv.style.display = "none";
-
-        // Show only the three link buttons
-        const links = [
-            { text: "Read Digital Products Article", url: "https://medium.com/@nsikuthoko22/how-i-made-7-3-million-selling-digital-products-the-beginners-blueprint-e40514703e8d" },
-            { text: "Video Tutorial", url: "https://youtu.be/A-YpJGngwjs" },
-            { text: "Register Start Selling Digital Products Now", url: "https://gumroad.com/" }
-        ];
-
-        links.forEach(link => {
-            const btn = document.createElement('button');
-            btn.innerText = link.text;
-            btn.onclick = () => window.open(link.url, '_blank');
-            linksContainer.appendChild(btn);
-        });
-
-    } catch (err) {
-        console.error(err);
-        errorDiv.innerText = "❌ Network error. Please try again.";
-    }
-});
+  if (params.get("success") === "1") {
+    // Show buttons after successful submission
+    contentDiv.innerHTML = `
+      <h3>Subscription Successful!</h3>
+      <p>Choose what you'd like to do next:</p>
+      <div class="btn-container">
+        <button onclick="window.location.href='https://medium.com/@nsikuthoko22/how-i-made-7-3-million-selling-digital-products-the-beginners-blueprint-e40514703e8d'">Read Digital Products Article</button>
+        <button onclick="window.location.href='https://youtu.be/A-YpJGngwjs'">Video Tutorial</button>
+        <button onclick="window.location.href='https://gumroad.com/'">Register Start Selling Digital Products Now</button>
+      </div>
+    `;
+  } else {
+    // Show form normally
+    contentDiv.innerHTML = `
+      <form action="https://script.google.com/macros/s/AKfycbxzaB4aC2-SXjheHz4drYauk5OaJOUcjjQpY4q-bteDELobD1xTPuAm2kYoRDZCQaBR/exec" method="POST">
+        <input type="email" name="email" placeholder="Enter your email" required>
+        <br>
+        <button type="submit">Subscribe</button>
+      </form>
+    `;
+  }
 </script>
 
 </body>
