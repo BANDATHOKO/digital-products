@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Affiliate Resources</title>
+
+<style>
+  body { 
+      font-family: Arial; text-align: center; 
+      padding: 50px; background-color: #f5f5f5; 
+  }
+  h2 { color: #6a49a2; }
+  p { margin-bottom: 20px; }
+  button { 
+      padding: 12px 20px; background-color: #6a49a2;
+      color: white; border: none; cursor: pointer;
+      border-radius: 5px; margin: 8px; font-size: 16px;
+  }
+  button:hover { background-color: #59338a; }
+</style>
+
+</head>
+<body>
+
+<h2>Affiliate Program Resources</h2>
+<p>Choose a resource below to continue:</p>
+
+<div id="linksContainer"></div>
+
+<script>
+// List of buttons
+const links = [
+    { text: "Read Affiliate Article", url: "https://affise.com/blog/how-to-create-an-affiliate-program/" },
+    { text: "Video Tutorial", url: "https://youtu.be/HLMwinDXrFY" },
+    { text: "Register Affiliate Program Now", url: "https://www.cpagrip.com/signup.php?ref=2069495" }
+];
+
+const linksContainer = document.getElementById('linksContainer');
+
+// Create and display buttons
+links.forEach(link => {
+    const btn = document.createElement("button");
+    btn.innerText = link.text;
+    btn.onclick = () => window.open(link.url, "_blank");
+    linksContainer.appendChild(btn);
+});
+</script>
+
+</body>
+</html>
