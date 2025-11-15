@@ -3,63 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Email Signup - Redirect Method</title>
+<title>Navigation</title>
+
 <style>
-  body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #f5f5f5; }
-  h2 { color: #6a49a2; }
-  form input { 
-    padding: 10px; 
-    width: 250px; 
-    margin-bottom: 15px; 
-    border: 2px solid #6a49a2; 
-    border-radius: 6px; 
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 50px;
+    background-color: #f5f5f5;
   }
-  button { 
-    padding: 10px 20px; 
-    background-color: #6a49a2; 
-    color: white; 
-    border: none; 
-    cursor: pointer; 
-    border-radius: 6px; 
-    margin: 10px;
+  h2 {
+    color: #6a49a2;
   }
-  .btn-container { margin-top: 20px; }
+  button {
+    padding: 14px 26px;
+    background-color: #6a49a2;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    margin: 12px;
+    font-size: 20px;
+  }
 </style>
+
 </head>
 <body>
 
-<h2>Stay Up-to-Date with Online Digital Products Tips!</h2>
-<p>Subscribe to get daily tips, guides, and insights.</p>
+<h2>Explore Our Digital Resources</h2>
+<p>Select where you want to go:</p>
 
-<div id="content"></div>
+<button onclick="window.location.href='freelancing.html'">
+  Freelance
+</button>
 
-<script>
-  // Check URL parameters for success
-  const params = new URLSearchParams(window.location.search);
-  const contentDiv = document.getElementById("content");
+<button onclick="window.location.href='affiliates.html'">
+  Affiliates
+</button>
 
-  if (params.get("success") === "1") {
-    // Show buttons after successful submission
-    contentDiv.innerHTML = `
-      <h3>Subscription Successful!</h3>
-      <p>Choose what you'd like to do next:</p>
-      <div class="btn-container">
-        <button onclick="window.location.href='https://medium.com/@nsikuthoko22/how-i-made-7-3-million-selling-digital-products-the-beginners-blueprint-e40514703e8d'">Read Digital Products Article</button>
-        <button onclick="window.location.href='https://youtu.be/A-YpJGngwjs'">Video Tutorial</button>
-        <button onclick="window.location.href='https://gumroad.com/'">Register Start Selling Digital Products Now</button>
-      </div>
-    `;
-  } else {
-    // Show form normally
-    contentDiv.innerHTML = `
-      <form action="https://script.google.com/macros/s/AKfycbxzaB4aC2-SXjheHz4drYauk5OaJOUcjjQpY4q-bteDELobD1xTPuAm2kYoRDZCQaBR/exec" method="POST">
-        <input type="email" name="email" placeholder="Enter your email" required>
-        <br>
-        <button type="submit">Subscribe</button>
-      </form>
-    `;
-  }
-</script>
+<button onclick="window.location.href='digital.html'">
+  Digital Products
+</button>
 
 </body>
 </html>
